@@ -1,0 +1,9 @@
+* {
+    font-family: 'Noto Serif', serif;
+}
+
+.outline {
+    outline-style: auto;
+    outline-width: 1px;
+    outline-color: rgb(185, 185, 185);
+}
