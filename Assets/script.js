@@ -1,42 +1,68 @@
 $(document).ready(function () {
-    
+
     var cityArr = [];
     var searchInput = $("#searchInput");
-    
+    var city = "London";
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=fb4315cea4eb938c59ecfe1bbed51784&units=metric";
 
-   
 
-    function createText(text, response, string) {
-        $("." + text + " ").text(" " + string + " " + response);
-    }
+    console.log(queryURL);
+
+    var queryURL2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=fb4315cea4eb938c59ecfe1bbed51784&units=metric";
+    var lat = "";
+    var lon = "";
+
+
+    // function createHTML (className, response) {
+    //     $("." + className + " ").HTML
+    // }
+
+
+    // function createText(text, response, string) {
+    //     $("." + text + " ").text(" " + string + " " + response);
+    // }
 
     function callAPIs() {
-        var city = "";
-        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=fb4315cea4eb938c59ecfe1bbed51784&units=metric";
-    
-    
-        console.log(queryURL);
-    
-        var queryURL2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=fb4315cea4eb938c59ecfe1bbed51784&units=metric";
-        var lat = "";
-        var lon = "";
+
+
+
         
-        $("#cityWeather").text("Today's Weather in " + city);
-       city = searchInput.val();
-       console.log(city);
+        // city = searchInput.val().trim();
+        console.log(city);
 
         $.ajax({
             url: queryURL,
             method: "GET",
         }).then(function (response) {
             console.log(response);
+            console.log(response.city.name);
+            $("#cityWeather").text("Today's Weather in " + response.city.name)
+
+            console.log(response.list[0].weather[0].icon);
+            $("#weatherIcon").attr("src", "http://openweathermap.org/img/w/" + response.list[0].weather[0].icon + ".png");
+            
+            console.log(response.list[0].main.temp);
+            $("#cityTemp").text("Temperature: " + response.list[0].main.temp + "°C");
+           
+            console.log(response.list[0].main.humidity);
+            $("#cityHumid").text("Humidity: " + response.list[0].main.humidity + "%");
+            
+            console.log(response.list[0].wind.speed);
+            $("#cityWind").text("Wind Speed: " + response.list[0].wind.speed + "mph");
+            
+            console.log(response.city.coord.lat);
+            console.log(response.city.coord.lon);
+            lat = response.city.coord.lat;
+            lon = response.city.coord.lon;
+
         });
 
         $.ajax({
             url: queryURL2,
             method: "GET",
-        }).then(function (response) {
-            console.log(response);
+        }).then(function (response2) {
+            console.log(response2);
+            
         });
     };
 
