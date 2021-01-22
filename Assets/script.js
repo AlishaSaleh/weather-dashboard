@@ -1,23 +1,16 @@
 $(document).ready(function () {
 
-
-
     var cityArr = [];
     var searchInput = $("#searchInput");
-    var city = "london";
-    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&exclude=hourly&appid=fb4315cea4eb938c59ecfe1bbed51784&units=metric";
+    var city = "";
 
-    var queryURL2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,daily&appid=fb4315cea4eb938c59ecfe1bbed51784&units=metric";
     var lat = "";
     var lon = "";
 
-    console.log(queryURL);
-
-
-
     function callAPIs() {
+        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&exclude=hourly&appid=fb4315cea4eb938c59ecfe1bbed51784&units=metric";
 
-
+        console.log(queryURL);
 
 
         // city = searchInput.val().trim();
@@ -28,32 +21,26 @@ $(document).ready(function () {
             method: "GET",
         }).then(function (response) {
             console.log(response);
-            console.log(response.city.name);
+            
             // Current day 
             $("#cityWeather").text("Today's Weather in " + response.city.name)
             var today = moment().format("L");
             $("#todayDate").text(today);
 
-            console.log(response.list[0].weather[0].icon);
+            // Today's weather info
             $("#weatherIcon").attr("src", "http://openweathermap.org/img/w/" + response.list[0].weather[0].icon + ".png");
-
-            console.log(response.list[0].main.temp);
             $("#cityTemp").text("Temperature: " + response.list[0].main.temp + "°C");
-
-            console.log(response.list[0].main.humidity);
             $("#cityHumid").text("Humidity: " + response.list[0].main.humidity + "%");
-
-            console.log(response.list[0].wind.speed);
             $("#cityWind").text("Wind Speed: " + response.list[0].wind.speed + "mph");
 
-            console.log(response.city.coord.lat);
-            console.log(response.city.coord.lon);
+            // console.log(response.city.coord.lat);
+            // console.log(response.city.coord.lon);
             lat = response.city.coord.lat;
             lon = response.city.coord.lon;
 
             // Next 5 days
             // dates
-            
+
             $("#dateDay1").text(moment().add(1, "days").format("L"));
             $("#dateDay2").text(moment().add(2, "days").format("L"));
             $("#dateDay3").text(moment().add(3, "days").format("L"));
@@ -63,24 +50,28 @@ $(document).ready(function () {
 
             var dayNum = 0;
 
-            //iterate through the 40 weather data sets
+            // for loop to go through the response length
             for (var i = 0; i < response.list.length; i++) {
                 $("#tempDay" + dayNum).text("Temperature: " + response.list[i].main.temp + "°C");
-                $("#humidDay"+ dayNum).text("Humidity: " + response.list[i].main.humidity + "%");
+                $("#humidDay" + dayNum).text("Humidity: " + response.list[i].main.humidity + "%");
                 $("#iconDay" + dayNum).attr("src", "http://openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png");
                 dayNum++;
 
             }
 
+            var queryURL2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,minutely&appid=fb4315cea4eb938c59ecfe1bbed51784&units=metric";
 
-                $.ajax({
-                    url: queryURL2,
-                    method: "GET",
-                }).then(function (response2) {
-                    console.log(response2);
+            $.ajax({
+                url: queryURL2,
+                method: "GET",
+            }).then(function (response2) {
+                console.log(response2);
+                $("#uvBadge").text("UV index: " + response2.current.uvi);
+                // if statement for the UV index colour
 
-                });
+
             });
+        });
     };
 
     $("button").on("click", function (event) {
@@ -93,23 +84,36 @@ $(document).ready(function () {
             cityArr.shift()
         }
         // include a break here??
+        console.log(cityArr);
 
         callAPIs();
+        storeCities();
 
     });
 
     // Function that stores the "cities" array in local storage
     function storeCities() {
-        localStorage.setItem("cityArr".JSON.stringify(cityArr));
+        localStorage.setItem("cityArr", JSON.stringify(cityArr));
     };
 
     function restoreCities() {
         var cityHistory = JSON.parse(localStorage.getItem("cityArr"));
 
-        if (cityHistory !== null) {
+        if (cityHistory) {
             cityArr = cityHistory;
         }
+        createHistory(cityHistory)
         //call function that turns the cityHistory into buttons here
+        //loop
+    };
+
+    function createHistory(arr) {
+        // make the function for creating items
+        //bootstrap list groups
+        //event listener - wrapped around the list items
+        
+
+
     }
 
 });
