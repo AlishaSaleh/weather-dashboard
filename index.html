@@ -55,15 +55,79 @@
 
             <div class="col-md-8 my-3 mx-3 rounded outline">
                 <h2 class="my-2" id="cityWeather"></h2>
+                <h4 id="todayDate"></h4>
                 <img id="weatherIcon">
                 <p id="cityTemp"></p>
                 <p id="cityHumid"></p>
                 <p id="cityWind"></p>
-                
-
 
             </div>
-
+            <br>
+            <!-- <div class="col-md-8 my-3 mx-3 rounded outline"> -->
+                <div class="row">
+                    <h2>5-Day Forecast:</h2>
+                    <div class="col-md-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title" id="dateDay1"></div>
+                                <div class="card-text">
+                                    <p id="tempDay1">day 1</p>
+                                    <p id="humidDay1"></p>
+                                    <img id="iconDay1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title" id="dateDay2"></div>
+                                <div class="card-text">
+                                    <p id="tempDay2">day 2</p>
+                                    <p id="humidDay2"></p>
+                                    <img id="iconDay2">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title" id="dateDay3"></div>
+                                <div class="card-text">
+                                    <p id="tempDay3">day 3</p>
+                                    <p id="humidDay3"></p>
+                                    <img id="iconDay3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title" id="dateDay4"></div>
+                                <div class="card-text">
+                                    <p id="tempDay4">day 4</p>
+                                    <p id="humidDay4"></p>
+                                    <img id="iconDay4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title" id="dateDay5"></div>
+                                <div class="card-text">
+                                    <p id="tempDay5">day 5</p>
+                                    <p id="humidDay5"></p>
+                                    <img id="iconDay5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- </div> -->
 
 
 
@@ -76,6 +140,7 @@
     <!--jQuery CDN-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="Assets/script.js"></script>
+    <script src="Assets/moment-with-locales.js"></script>
 </body>
 
 </html>
