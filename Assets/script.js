@@ -66,8 +66,18 @@ $(document).ready(function () {
                 method: "GET",
             }).then(function (response2) {
                 console.log(response2);
-                $("#uvBadge").text("UV index: " + response2.current.uvi);
-                // if statement for the UV index colour
+                var uvIndex = response2.current.uvi;
+                $("#uvBadge").text("UV index: " + uvIndex);
+                // if statement for the UV index colour 
+                if (uvIndex < 3) {
+                    $("#uvBadge").attr("class", "badge bg-success");
+                }
+                else if (uvIndex > 3 && uvIndex < 7) {
+                    $("#uvBadge").attr("class", "badge bg-warning text-dark");
+                }
+                else {
+                    $("#uvBadge").attr("class", "badge bg-danger");
+                }
 
 
             });
@@ -102,12 +112,17 @@ $(document).ready(function () {
         if (cityHistory) {
             cityArr = cityHistory;
         }
+        console.log(cityHistory)
         createHistory(cityHistory)
         //call function that turns the cityHistory into buttons here
         //loop
+        // for(var i = 0; i < cityHistory.length; i++) {
+
+        // }
     };
 
     function createHistory(arr) {
+        restoreCities();
         // make the function for creating items
         //bootstrap list groups
         //event listener - wrapped around the list items
