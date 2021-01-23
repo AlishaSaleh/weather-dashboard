@@ -37,7 +37,7 @@
                         <div class="form-group py-2">
                             <label for="search">Search by city:</label>
                             <input type="text" class="search" id="searchInput" placeholder="Enter city...">
-                            <button class="btn btn-dark" type="submit">
+                            <button class="btn btn-dark" type="submit" id="searchBtn">
                                 <i class="bi bi-search"></i>
                             </button>
                     </form>
@@ -45,7 +45,7 @@
                     <br>
                     
                     <h6>Your previous searches: </h6>
-                    <div class="col" id="searchedCities"></div>
+                    <div class="list-group" id="searchedCities"></div>
 
                     <!-- add previous searches here dynamically -->
 
@@ -56,13 +56,13 @@
 
 
             <div class="col-md-8 my-3 mx-3 rounded outline">
-                <h2 class="my-2" id="cityWeather"></h2>
+                <h2 class="my-2" id="cityWeather">Search a city for the weather!</h2>
                 <h4 id="todayDate"></h4>
                 <img id="weatherIcon">
                 <p id="cityTemp"></p>
                 <p id="cityHumid"></p>
                 <p id="cityWind"></p>
-                <p><span class="badge" id="uvBadge">text</span></p>
+                <p><span class="badge" id="uvBadge"></span></p>
                 
 
             </div>

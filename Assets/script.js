@@ -84,7 +84,7 @@ $(document).ready(function () {
         });
     };
 
-    $("button").on("click", function (event) {
+    $("#searchBtn").on("click", function (event) {
         event.preventDefault();
         city = searchInput.val().trim();
         // pushes city input to an empty array
@@ -98,6 +98,8 @@ $(document).ready(function () {
 
         callAPIs();
         storeCities();
+        restoreCities();
+
 
     });
 
@@ -116,19 +118,30 @@ $(document).ready(function () {
         createHistory(cityHistory)
         //call function that turns the cityHistory into buttons here
         //loop
-        // for(var i = 0; i < cityHistory.length; i++) {
-
-        // }
+        
     };
 
     function createHistory(arr) {
-        restoreCities();
+        var historyCont = $("#searchedCities");
+        historyCont.empty();
+        for(var i = 0; i < arr.length; i++) {
+            var historyItem = $("<button>").addClass("list-group-item list-group-item-action");
+            historyItem.text(arr[i]);
+            historyCont.prepend(historyItem);
+         }
+        
         // make the function for creating items
         //bootstrap list groups
         //event listener - wrapped around the list items
-        
+        $(".list-group-item").on("click", function(event){
+        event.preventDefault();
+        city = historyItem.val();
+        callAPIs(city);
+    })
 
 
     }
+
+    
 
 });
