@@ -88,6 +88,7 @@ $(document).ready(function () {
         });
     };
 
+
     $("#searchBtn").on("click", function (event) {
         event.preventDefault();
         city = searchInput.val().trim();
@@ -114,7 +115,7 @@ $(document).ready(function () {
 
         if (cityHistory) {
             cityArr = cityHistory;
-        }
+        } 
         console.log(cityHistory)
         //call function that turns the cityHistory into buttons here
         createHistory(cityHistory)
