@@ -7,7 +7,7 @@ $(document).ready(function () {
     var lat = "";
     var lon = "";
 
-    var cityHistory = JSON.parse(localStorage.getItem("cityArr"));
+    
 
     $("#5daySection").hide();
 
@@ -104,7 +104,7 @@ $(document).ready(function () {
         console.log(cityArr);
         callAPIs();
         storeCities();
-        // restoreCities();
+        restoreCities();
         // createHistory(cityHistory);
     });
 
@@ -114,6 +114,7 @@ $(document).ready(function () {
     };
 
     function restoreCities() {
+        var cityHistory = JSON.parse(localStorage.getItem("cityArr"));
 
 
         if (cityHistory) {
