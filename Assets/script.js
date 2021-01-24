@@ -7,6 +7,8 @@ $(document).ready(function () {
     var lat = "";
     var lon = "";
 
+    restoreCities();
+
     function callAPIs() {
         var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&exclude=hourly&appid=fb4315cea4eb938c59ecfe1bbed51784&units=metric";
 
@@ -21,7 +23,7 @@ $(document).ready(function () {
             method: "GET",
         }).then(function (response) {
             console.log(response);
-            
+
             // Current day 
             $("#cityWeather").text("Today's Weather in " + response.city.name)
             var today = moment().format("L");
@@ -99,6 +101,7 @@ $(document).ready(function () {
         callAPIs();
         storeCities();
         restoreCities();
+        
 
 
     });
@@ -118,30 +121,29 @@ $(document).ready(function () {
         createHistory(cityHistory)
         //call function that turns the cityHistory into buttons here
         //loop
-        
+
     };
 
     function createHistory(arr) {
         var historyCont = $("#searchedCities");
         historyCont.empty();
-        for(var i = 0; i < arr.length; i++) {
+        for (var i = 0; i < arr.length; i++) {
             var historyItem = $("<button>").addClass("list-group-item list-group-item-action");
             historyItem.text(arr[i]);
             historyCont.prepend(historyItem);
-         }
-        
+        }
+
         // make the function for creating items
         //bootstrap list groups
         //event listener - wrapped around the list items
-        $(".list-group-item").on("click", function(event){
-        event.preventDefault();
-        city = historyItem.val();
-        callAPIs(city);
-    })
 
+
+        $(".list-group-item").on("click", function (event) {
+            event.preventDefault();
+            city = $(this).text();
+            callAPIs();
+        });
 
     }
-
-    
 
 });
