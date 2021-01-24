@@ -7,3 +7,22 @@ This application allows the user to search any city and recieve the weather info
 * APIs
 * Dynamically created content
 * Responsive design
+* Use of local storage
+
+## Screenshots
+
+Here is the page on first load:
+
+![on load](./Assets/Screenshots/weather-screenshot-3.png)
+
+With clickable a search history list:
+
+![on click](./Assets/Screenshots/weather-screenshot.png)
+
+And returning the last searched city weather information on refresh of the page:
+
+![refreshed](./Assets/Screenshots/weather-screenshot-2.png)
+
+## URL
+
+[Deployed URL](https://alishasaleh.github.io/weather-dashboard/)
