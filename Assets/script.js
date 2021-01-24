@@ -7,6 +7,8 @@ $(document).ready(function () {
     var lat = "";
     var lon = "";
 
+    var cityHistory = JSON.parse(localStorage.getItem("cityArr"));
+
     $("#5daySection").hide();
 
     restoreCities();
@@ -103,6 +105,7 @@ $(document).ready(function () {
         callAPIs();
         storeCities();
         // restoreCities();
+        // createHistory(cityHistory);
     });
 
     // Function that stores the "cities" array in local storage
@@ -111,26 +114,27 @@ $(document).ready(function () {
     };
 
     function restoreCities() {
-        var cityHistory = JSON.parse(localStorage.getItem("cityArr"));
+
 
         if (cityHistory) {
             cityArr = cityHistory;
-        } 
-        console.log(cityHistory)
-        //call function that turns the cityHistory into buttons here
-        createHistory(cityHistory)
-        // conditional statement that shows the last searched city info when page refreshed
-        if (cityHistory.length > 0) {
-            city = cityHistory[cityHistory.length - 1];
-            callAPIs(city);
-        }
 
+            console.log(cityHistory)
+            //call function that turns the cityHistory into buttons here
+            createHistory(cityHistory)
+            // conditional statement that shows the last searched city info when page refreshed
+            if (cityHistory.length > 0) {
+                city = cityHistory[cityHistory.length - 1];
+                callAPIs(city);
+            }
+        }
     };
 
     function createHistory(arr) {
         var historyCont = $("#searchedCities");
         historyCont.empty();
         // creates buttons from search history
+
         for (var i = 0; i < arr.length; i++) {
             var historyItem = $("<button>").addClass("list-group-item list-group-item-action");
             historyItem.text(arr[i]);
