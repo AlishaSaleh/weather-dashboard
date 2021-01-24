@@ -7,16 +7,18 @@ $(document).ready(function () {
     var lat = "";
     var lon = "";
 
+    $("#5daySection").hide();
+
     restoreCities();
+
 
     function callAPIs() {
         var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&exclude=hourly&appid=fb4315cea4eb938c59ecfe1bbed51784&units=metric";
 
         console.log(queryURL);
-
-
-        // city = searchInput.val().trim();
         console.log(city);
+
+        $("#5daySection").show();
 
         $.ajax({
             url: queryURL,
@@ -35,14 +37,13 @@ $(document).ready(function () {
             $("#cityHumid").text("Humidity: " + response.list[0].main.humidity + "%");
             $("#cityWind").text("Wind Speed: " + response.list[0].wind.speed + "mph");
 
-            // console.log(response.city.coord.lat);
-            // console.log(response.city.coord.lon);
+            // Take latitiude and longitude from 5day forecast API to run through OneCall API
             lat = response.city.coord.lat;
             lon = response.city.coord.lon;
 
             // Next 5 days
-            // dates
 
+            // Dates
             $("#dateDay1").text(moment().add(1, "days").format("L"));
             $("#dateDay2").text(moment().add(2, "days").format("L"));
             $("#dateDay3").text(moment().add(3, "days").format("L"));
@@ -52,7 +53,7 @@ $(document).ready(function () {
 
             var dayNum = 0;
 
-            // for loop to go through the response length
+            // for loop to go through the response length and create content
             for (var i = 0; i < response.list.length; i++) {
                 $("#tempDay" + dayNum).text("Temperature: " + response.list[i].main.temp + "°C");
                 $("#humidDay" + dayNum).text("Humidity: " + response.list[i].main.humidity + "%");
@@ -61,6 +62,7 @@ $(document).ready(function () {
 
             }
 
+            // OneCall API call for UV index info
             var queryURL2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,minutely&appid=fb4315cea4eb938c59ecfe1bbed51784&units=metric";
 
             $.ajax({
@@ -95,15 +97,11 @@ $(document).ready(function () {
         if (cityArr.length > 8) {
             cityArr.shift()
         }
-        // include a break here??
+        // call functions
         console.log(cityArr);
-
         callAPIs();
         storeCities();
-        restoreCities();
-        
-
-
+        // restoreCities();
     });
 
     // Function that stores the "cities" array in local storage
@@ -118,26 +116,27 @@ $(document).ready(function () {
             cityArr = cityHistory;
         }
         console.log(cityHistory)
-        createHistory(cityHistory)
         //call function that turns the cityHistory into buttons here
-        //loop
+        createHistory(cityHistory)
+        // conditional statement that shows the last searched city info when page refreshed
+        if (cityHistory.length > 0) {
+            city = cityHistory[cityHistory.length - 1];
+            callAPIs(city);
+        }
 
     };
 
     function createHistory(arr) {
         var historyCont = $("#searchedCities");
         historyCont.empty();
+        // creates buttons from search history
         for (var i = 0; i < arr.length; i++) {
             var historyItem = $("<button>").addClass("list-group-item list-group-item-action");
             historyItem.text(arr[i]);
             historyCont.prepend(historyItem);
         }
 
-        // make the function for creating items
-        //bootstrap list groups
-        //event listener - wrapped around the list items
-
-
+        //event listener to make the buttons functional
         $(".list-group-item").on("click", function (event) {
             event.preventDefault();
             city = $(this).text();
