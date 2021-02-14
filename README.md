@@ -3,15 +3,16 @@
 ## Description 
 
 This application allows the user to search any city and recieve the weather information for that city. It also provides the UV index of searched city with colours depicting whether they are favourable, moderate or severe. Features of this project include:
-* jQuery
+* JavaScript with jQuery
 * APIs
 * Dynamically created content
 * Responsive design
 * Use of local storage
 
 ## Credits
-* Open Weather API
-* Bootstrap 5
+* ![Open Weather API](https://openweathermap.org/api)
+* ![Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+* ![jQuery](https://jquery.com/)
 
 ## Screenshots
 
