@@ -9,6 +9,10 @@ This application allows the user to search any city and recieve the weather info
 * Responsive design
 * Use of local storage
 
+## Credits
+* Open Weather API
+* Bootstrap 5
+
 ## Screenshots
 
 Here is the page on first load:
