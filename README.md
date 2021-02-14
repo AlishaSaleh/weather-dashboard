@@ -26,3 +26,9 @@ And returning the last searched city weather information on refresh of the page:
 ## URL
 
 [Deployed URL](https://alishasaleh.github.io/weather-dashboard/)
+
+## License
+
+Standard MIT License
+
+[![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=flat-square)](https://github.com/DAVFoundation/captain-n3m0/blob/master/LICENSE)
